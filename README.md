@@ -32,7 +32,7 @@ The executable JAR will be created at `target/praty-0.1.0.jar`.
 
 Windows wrapper
 
-Create a folder (example: `C:\tools\praty`) and copy these two files into it:
+Create a folder (example: `C:\praty`) and copy these two files into it:
 
 - `target/praty-0.1.0.jar` (rename to `praty-0.1.0.jar` or edit the batch script)
 - `praty.bat` (from `scripts/praty.bat`)
