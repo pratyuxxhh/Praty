@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # praty — Minimal CLI (Java 21 + Maven)
 
 This repository contains a minimal, extensible CLI called `praty` implemented in Java 21 and Maven.
@@ -57,3 +58,6 @@ After opening a new terminal you can run:
 praty awake
 praty sleep
 ```
+=======
+# praty
+>>>>>>> 09dd0a8c35d0b78d2f0da052581b7f812ac5ef3e
