@@ -24,7 +24,8 @@ public class RemoveApplicationCommand implements Command {
 
         String key = args.get(0);
 
-        File file = new File("C:\\Users\\ishuk\\apps.json");
+        String appStorePath = praty.EnvConfig.get("PRATY_APP_STORE", "C:\\Users\\ishuk\\apps.json");
+        File file = new File(appStorePath);
 
         try {
             ObjectMapper mapper = new ObjectMapper();

@@ -14,7 +14,8 @@ public class ListApplicationsCommand implements Command {
 
     @Override
     public void execute(CommandContext ctx) {
-        File file = new File("C:\\Users\\ishuk\\apps.json");
+        String appStorePath = praty.EnvConfig.get("PRATY_APP_STORE", "C:\\Users\\ishuk\\apps.json");
+        File file = new File(appStorePath);
 
         try {
             ObjectMapper mapper = new ObjectMapper();

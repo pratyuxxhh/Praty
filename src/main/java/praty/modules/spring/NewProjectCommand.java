@@ -44,7 +44,10 @@ public class NewProjectCommand implements Command {
             return;
         }
 
-        runSpringInit(springArgs);
+        boolean success = runSpringInit(springArgs);
+        if (success) {
+            DependencyUsageStore.recordUsage(config.dependencies);
+        }
     }
 
     public static List<String> buildSpringInitArguments(ProjectConfig config) {
@@ -76,7 +79,7 @@ public class NewProjectCommand implements Command {
         }
     }
 
-    private void runSpringInit(List<String> springArgs) {
+    private boolean runSpringInit(List<String> springArgs) {
         List<String> command = new ArrayList<>();
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
             command.add("cmd.exe");
@@ -102,8 +105,10 @@ public class NewProjectCommand implements Command {
             int exitCode = process.waitFor();
             if (exitCode == 0) {
                 System.out.println("Project generation completed successfully.");
+                return true;
             } else {
                 System.err.printf("Spring init exited with code %d.%n", exitCode);
+                return false;
             }
         } catch (IOException e) {
             throw new UncheckedIOException("Unable to run Spring CLI. Make sure 'spring' is installed and available on your PATH.", e);

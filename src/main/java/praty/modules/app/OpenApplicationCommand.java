@@ -26,8 +26,9 @@ public class OpenApplicationCommand implements Command {
         try {
             ObjectMapper mapper = new ObjectMapper();
 
+            String appStorePath = praty.EnvConfig.get("PRATY_APP_STORE", "C:\\Users\\ishuk\\apps.json");
             Map<String, String> apps = mapper.readValue(
-                    new File("C:\\Users\\ishuk\\apps.json"),
+                    new File(appStorePath),
                     new TypeReference<Map<String, String>>() {
                     });
 

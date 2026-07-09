@@ -1,3 +1,4 @@
+C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\spring\NewProjectCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\command\CommandRegistry.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\file\CopyCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\file\UnzipCommand.java
@@ -7,14 +8,17 @@ C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\shutd
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\command\CommandContext.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\updates\GetUpdateCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\awake\AwakeCommand.java
+C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\spring\DependencyUsageStore.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\file\MoveCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\app\OpenApplicationCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\app\ListApplicationsCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\command\Parser.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\command\Command.java
-C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\setup\NewProjectCommand.java
+C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\EnvConfig.java
+C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\man\ShowManualCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\sleep\SleepCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\cd\ToHomeDirectoryCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\app\AddNewApplicationToOpen.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\restart\RestartCommand.java
 C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\Main.java
+C:\Users\ishuk\OneDrive\Desktop\programs\PRATY\src\main\java\praty\modules\spring\ShowDependencies.java

@@ -14,6 +14,7 @@ import praty.modules.file.CopyCommand;
 import praty.modules.file.DeleteCommand;
 import praty.modules.file.MoveCommand;
 import praty.modules.file.UnzipCommand;
+import praty.modules.man.ShowManualCommand;
 import praty.modules.restart.RestartCommand;
 import praty.modules.shutdown.ShutdownCommand;
 import praty.modules.sleep.SleepCommand;
@@ -48,7 +49,7 @@ public class Main {
         command.execute(ctx);
     }
 
-    static CommandRegistry registry = new CommandRegistry();
+    public static final CommandRegistry registry = new CommandRegistry();
 
     static {
 
@@ -83,6 +84,7 @@ public class Main {
         
         registry.register("spring", "setup", new NewProjectCommand());
         registry.register("spring", "deps", new ShowDependencies());
+        registry.register("man", "", new ShowManualCommand());
     }
 }
 

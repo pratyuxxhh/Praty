@@ -1,15 +1,29 @@
 package praty.modules.spring;
 
 import praty.command.Command;
+import praty.command.CommandContext;
+
+import java.util.Comparator;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class ShowDependencies implements Command {
     @Override
-    public void execute(praty.command.CommandContext ctx) {
-        System.out.println("Showing dependencies for the Spring project...");
-        // Here you would implement the logic to show dependencies
+    public void execute(CommandContext ctx) {
+        System.out.println("Spring dependency usage counts:");
+        Map<String, Integer> counts = DependencyUsageStore.loadCounts();
+
+        if (counts.isEmpty()) {
+            System.out.println("No dependency usage history found. Create a project first to populate usage counts.");
+            return;
+        }
+
+        Stream<Map.Entry<String, Integer>> sortedEntries = counts.entrySet().stream()
+                .sorted(Comparator.<Map.Entry<String, Integer>>comparingInt(Map.Entry::getValue).reversed()
+                        .thenComparing(Map.Entry::getKey));
+
+        sortedEntries.forEach(entry -> System.out.printf("%s: %d%n", entry.getKey(), entry.getValue()));
     }
-    
-    
 }
 /*
 

@@ -27,7 +27,8 @@ public class AddNewApplicationToOpen implements Command {
         String key = args.get(0);
         String value = args.get(1);
 
-        File file = new File("C:\\Users\\ishuk\\apps.json");
+        String appStorePath = praty.EnvConfig.get("PRATY_APP_STORE", "C:\\Users\\ishuk\\apps.json");
+        File file = new File(appStorePath);
         System.out.println(file.getAbsolutePath());
         ObjectMapper mapper = new ObjectMapper();
 
