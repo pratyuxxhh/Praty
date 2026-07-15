@@ -45,13 +45,13 @@ class ZipProjectGeneratorTest {
         Files.createDirectories(workDir);
         Path target = workDir.resolve("my-blog");
         Path zip = tempDir.resolve("flat.zip");
-        writeZip(zip, "build.gradle", "plugins { id 'java' }");
+        writeZip(zip, "build.gradle.kts", "plugins { java }");
 
         ProjectSpec spec = projectSpec(target, "my-blog");
         ZipProjectGenerator generator = new ZipProjectGenerator();
         var result = generator.extract(zip, spec);
         assertTrue(result.isOk());
-        assertTrue(Files.exists(target.resolve("build.gradle")));
+        assertTrue(Files.exists(target.resolve("build.gradle.kts")));
         assertEquals(target.normalize(), result.get().projectDirectory().normalize());
     }
 

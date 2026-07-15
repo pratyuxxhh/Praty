@@ -36,7 +36,9 @@ public final class ProjectDetector {
     public static Result<Path> detectProjectDirectory(Path start) {
         Path current = start.toAbsolutePath().normalize();
         for (int depth = 0; depth < 6; depth++) {
-            if (Files.exists(current.resolve("pom.xml")) || Files.exists(current.resolve("build.gradle"))) {
+            if (Files.exists(current.resolve("pom.xml"))
+                    || Files.exists(current.resolve("build.gradle"))
+                    || Files.exists(current.resolve("build.gradle.kts"))) {
                 return Result.ok(current);
             }
             Path parent = current.getParent();
@@ -47,7 +49,7 @@ public final class ProjectDetector {
         }
         return Result.fail(new SpringxException(
                 "No Spring Boot project found.",
-                "Could not find pom.xml or build.gradle in the current directory.",
+            "Could not find pom.xml or build.gradle[.kts] in the current directory.",
                 "Run this command from inside a Spring Boot project."
         ));
     }
@@ -66,7 +68,7 @@ public final class ProjectDetector {
     public static List<DependencyRef> installedDependencies(Path projectDir) {
         return switch (buildTool(projectDir)) {
             case MAVEN -> scanMaven(projectDir.resolve("pom.xml"));
-            case GRADLE -> scanGradle(projectDir.resolve("build.gradle"));
+            case GRADLE -> scanGradle(gradleBuildFile(projectDir));
             default -> List.of();
         };
     }
@@ -112,6 +114,14 @@ public final class ProjectDetector {
         } catch (Exception e) {
             return List.of();
         }
+    }
+
+    private static Path gradleBuildFile(Path projectDir) {
+        Path groovy = projectDir.resolve("build.gradle");
+        if (Files.exists(groovy)) {
+            return groovy;
+        }
+        return projectDir.resolve("build.gradle.kts");
     }
 
     private static String extractDependenciesSection(String pom) {

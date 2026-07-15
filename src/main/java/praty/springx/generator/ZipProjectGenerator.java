@@ -121,7 +121,9 @@ public final class ZipProjectGenerator implements ProjectGenerator {
     }
 
     private static boolean hasBuildFile(Path directory) {
-        return Files.exists(directory.resolve("pom.xml")) || Files.exists(directory.resolve("build.gradle"));
+        return Files.exists(directory.resolve("pom.xml"))
+                || Files.exists(directory.resolve("build.gradle"))
+                || Files.exists(directory.resolve("build.gradle.kts"));
     }
 
     private static boolean isNonEmpty(Path directory) throws IOException {

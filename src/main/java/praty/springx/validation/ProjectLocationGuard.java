@@ -39,10 +39,10 @@ public final class ProjectLocationGuard {
             ));
         }
 
-        if (Files.exists(target) && Files.exists(target.resolve("build.gradle"))) {
+        if (Files.exists(target) && (Files.exists(target.resolve("build.gradle")) || Files.exists(target.resolve("build.gradle.kts")))) {
             return Result.fail(new SpringxException(
                     "Target directory already contains a Gradle project.",
-                    target + " already has a build.gradle.",
+                target + " already has a build.gradle or build.gradle.kts.",
                     "Choose a different project name."
             ));
         }

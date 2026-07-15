@@ -165,7 +165,6 @@ public final class JLineTerminalUi implements TerminalUi, AutoCloseable {
                 printed = redrawMulti(options, display, visible, selected, index, query.toString(), searching, printed);
                 Action action = readAction(reader, keys);
 
-                // Space always toggles the highlighted dependency (search mode or not).
                 if (action == Action.SPACE) {
                     if (!visible.isEmpty()) {
                         int real = visible.get(index);
@@ -361,7 +360,6 @@ public final class JLineTerminalUi implements TerminalUi, AutoCloseable {
             try {
                 terminal.close();
             } catch (IOException ignored) {
-                // ignore close failures
             }
         }
     }

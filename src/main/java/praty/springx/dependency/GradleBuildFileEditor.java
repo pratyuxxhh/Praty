@@ -19,7 +19,7 @@ public final class GradleBuildFileEditor implements BuildFileEditor {
 
     @Override
     public Result<Void> add(Path projectDir, List<DependencyRef> deps) {
-        Path buildGradle = projectDir.resolve("build.gradle");
+        Path buildGradle = gradleBuildFile(projectDir);
         if (!Files.exists(buildGradle)) {
             return notGradle();
         }
@@ -55,7 +55,7 @@ public final class GradleBuildFileEditor implements BuildFileEditor {
 
     @Override
     public Result<Void> remove(Path projectDir, List<DependencyRef> deps) {
-        Path buildGradle = projectDir.resolve("build.gradle");
+        Path buildGradle = gradleBuildFile(projectDir);
         if (!Files.exists(buildGradle)) {
             return notGradle();
         }
@@ -107,9 +107,17 @@ public final class GradleBuildFileEditor implements BuildFileEditor {
     private static Result<Void> notGradle() {
         return Result.fail(new SpringxException(
                 "No Gradle project found.",
-                "build.gradle is missing.",
+                "build.gradle or build.gradle.kts is missing.",
                 "Run this command from a Gradle Spring Boot project."
         ));
+    }
+
+    private static Path gradleBuildFile(Path projectDir) {
+        Path groovy = projectDir.resolve("build.gradle");
+        if (Files.exists(groovy)) {
+            return groovy;
+        }
+        return projectDir.resolve("build.gradle.kts");
     }
 
     private static Result<Void> ioError(IOException e) {

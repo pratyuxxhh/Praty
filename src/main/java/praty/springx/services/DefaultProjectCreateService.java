@@ -46,7 +46,6 @@ public final class DefaultProjectCreateService implements ProjectCreateService {
             try {
                 Files.deleteIfExists(zipFile);
             } catch (Exception ignored) {
-                // zip may already be deleted by generator
             }
             pluginRegistry.invoke(Hook.AFTER_CREATE, new praty.springx.plugin.Plugin.PluginContext(spec, extracted.get()));
         }

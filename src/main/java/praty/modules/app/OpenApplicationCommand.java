@@ -16,11 +16,6 @@ public class OpenApplicationCommand implements Command {
     public void execute(CommandContext ctx) {
         List<String> args = ctx.arguments();
 
-        // if (args.isEmpty()) {
-        //     System.out.println("Usage: praty open <key>");
-        //     return;
-        // }
-
         String key = args.get(0);
 
         try {

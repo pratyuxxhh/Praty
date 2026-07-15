@@ -4,13 +4,7 @@ import praty.command.Command;
 import praty.command.CommandContext;
 import praty.springx.commands.SetupCommand;
 
-/**
- * Public create entry: {@code praty spring setup}.
- *
- * <p>Delegates to {@link SetupCommand} (JLine wizard + Initializr HTTP API).
- * See {@code docs/springx/ARCHITECTURE.md}.
- */
-public class NewProjectCommand implements Command {
+public final class NewProjectCommand implements Command {
 
     private final SetupCommand setupCommand = new SetupCommand();
 
@@ -19,9 +13,6 @@ public class NewProjectCommand implements Command {
         setupCommand.execute(ctx);
     }
 
-    /**
-     * Kept for existing unit tests that assert argument building.
-     */
     public static java.util.List<String> buildSpringInitArguments(ProjectConfig config) {
         java.util.List<String> args = new java.util.ArrayList<>();
         args.add("init");
