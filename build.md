@@ -1,33 +1,60 @@
-# Build and install PRATY
+# Build and install PRATY (Windows)
 
-This guide shows how to build the PRATY Java application, rename the generated JAR file to a stable name, and copy it to `C:\praty` for easy execution.
+Build the shaded JAR, rename it to a stable name, and install under `C:\praty` so you can run `praty` from any folder.
 
-1. Build the project:
+## Requirements
 
-```bash
+- Java 21+ (`java -version`)
+- Maven 3.9+ (`mvn -version`)
+
+## Steps (PowerShell)
+
+Run from the PRATY project root:
+
+```powershell
+# 1. Build
 mvn clean package
+
+# 2. Stable name (matches scripts\praty.bat)
+Copy-Item target\praty-0.1.0.jar target\praty.jar -Force
+
+# 3. Install directory
+New-Item -ItemType Directory -Force -Path C:\praty | Out-Null
+Copy-Item target\praty.jar C:\praty\praty.jar -Force
+Copy-Item scripts\praty.bat C:\praty\praty.bat -Force
 ```
 
-- `mvn clean package` removes old build files, compiles the code, and creates the application JAR.
-- The generated JAR is stored in `target/`.
+### Add to PATH (once)
 
-2. Rename the generated JAR:
-
-```bash
-mv target/praty-0.1.0.jar target/praty.jar
+```powershell
+setx PATH "$env:PATH;C:\praty"
 ```
 
-- This renames the versioned artifact to `praty.jar` so it is easier to run and copy.
+Close and reopen the terminal, then:
 
-3. Copy the runnable JAR to `C:\praty`:
-
-```bash
-cp target/praty.jar C:\praty
+```powershell
+praty spring setup --help
 ```
-
-- Copying the JAR to `C:\praty` makes it easier to use from a shortcut or script.
 
 ## Notes
 
-- If your Maven build produces a different version, update the filename accordingly.
-- If you want to use a different install directory, replace `C:\praty` with your preferred path.
+- If Maven produces a different version (for example `praty-0.2.0.jar`), copy that file to `C:\praty\praty.jar` instead — `praty.bat` always runs `praty.jar`.
+- `mvn package` uses the shade plugin; `target\praty-0.1.0.jar` already includes dependencies (JLine, Jackson).
+- Use any install folder you like; update PATH and the copy destination accordingly.
+- After pulling new Spring features, run this guide again so `C:\praty` has a fresh JAR.
+
+## Git Bash alternative
+
+If you prefer Bash-style commands:
+
+```bash
+mvn clean package
+cp target/praty-0.1.0.jar target/praty.jar
+mkdir -p /c/praty
+cp target/praty.jar /c/praty/
+cp scripts/praty.bat /c/praty/
+```
+
+## Spring command manual
+
+See [docs/springx/USER_MANUAL.md](docs/springx/USER_MANUAL.md) for `praty spring setup`, `add`, `remove`, and `deps`.

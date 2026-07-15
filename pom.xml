@@ -16,6 +16,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.20.0</version>
         </dependency>
+        <!-- JLine 3: interactive terminal UI for springx wizard (wired in Phase 3) -->
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>3.27.1</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

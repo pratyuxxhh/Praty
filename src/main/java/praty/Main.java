@@ -20,6 +20,8 @@ import praty.modules.shutdown.ShutdownCommand;
 import praty.modules.sleep.SleepCommand;
 import praty.modules.spring.NewProjectCommand;
 import praty.modules.spring.ShowDependencies;
+import praty.springx.commands.AddCommand;
+import praty.springx.commands.RemoveCommand;
 import praty.modules.updates.GetUpdateCommand;
 
 import java.util.List;
@@ -83,6 +85,8 @@ public class Main {
         registry.register("cd", "~", new ToHomeDirectoryCommand());
         
         registry.register("spring", "setup", new NewProjectCommand());
+        registry.register("spring", "add", new AddCommand());
+        registry.register("spring", "remove", new RemoveCommand());
         registry.register("spring", "deps", new ShowDependencies());
         registry.register("man", "", new ShowManualCommand());
     }
