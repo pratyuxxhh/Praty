@@ -17,7 +17,11 @@
 
 `praty` started as a tiny command router — wake, sleep, open an app, copy a file.
 
-It's now also a **Spring Boot project assistant**: an interactive terminal wizard that creates new Spring Boot projects, adds or removes dependencies from existing ones, and talks directly to [Spring Initializr](https://start.spring.io) to keep everything up to date.
+<div align="center">
+<img width="800" alt="praty basic commands" src="https://github.com/user-attachments/assets/3c472d67-63dd-47ef-9692-f9813a8ed680" />
+</div>
+
+It's now also a **Spring Boot project assistant** — an interactive terminal wizard that creates new Spring Boot projects, adds or removes dependencies from existing ones, and talks directly to [Spring Initializr](https://start.spring.io) to keep everything up to date.
 
 ```
 Main → Parser → CommandRegistry → module command → Springx (wizard, network, validation, dependency editors)
@@ -34,7 +38,8 @@ The codebase splits cleanly into two halves:
 | 🖥️ **Command Layer** | `src/main/java/praty` | Parses input and routes to commands like `awake`, `file`, `app`, `cd`, `spring` |
 | 🌱 **Spring Layer** | `src/main/java/praty/springx` | Project creation, dependency management, Initializr metadata, build-file editing, terminal UI |
 
-### Key Pieces of the Spring Layer
+<details>
+<summary><b>Key pieces of the Spring layer</b></summary>
 
 | Class | Role |
 |---|---|
@@ -45,6 +50,8 @@ The codebase splits cleanly into two halves:
 | `springx.network.HttpInitializrClient` | Talks to Spring Initializr |
 | `springx.dependency.*` | Finds starters and edits the build file |
 | `springx.wizard.*` | Drives the interactive setup screens |
+
+</details>
 
 ---
 
@@ -105,37 +112,57 @@ praty man
 
 ### `praty spring setup`
 
+Spins up a brand-new Spring Boot project from scratch:
+
 ```
- 1. Load Spring Initializr metadata
- 2. Open the interactive JLine wizard
- 3. Choose name, group, artifact, build tool, language,
-    packaging, Java version, Spring Boot version, dependencies
- 4. Validate the target folder
- 5. Call Spring Initializr and download the starter project
- 6. Extract and configure the project
- 7. Save local usage data and recent project settings
+1. Load Spring Initializr metadata
+2. Open the interactive JLine wizard
+3. Choose name, group, artifact, build tool, language,
+   packaging, Java version, Spring Boot version, dependencies
+4. Validate the target folder
+5. Call Spring Initializr and download the starter project
+6. Extract and configure the project
+7. Save local usage data and recent project settings
 ```
 
-📸 *[Insert screenshot here]*
-📸 *[Insert screenshot here]*
+<div align="center">
+<img width="600" alt="spring setup wizard" src="https://github.com/user-attachments/assets/49a33c8f-5016-4b53-89d1-ff5d449fc1fb" />
+
+<br/><br/>
+
+<img width="400" alt="spring setup step 1" src="https://github.com/user-attachments/assets/bea664d7-1c13-4053-848a-d5363147e6ce" />
+<img width="400" alt="spring setup step 2" src="https://github.com/user-attachments/assets/8bff9998-3d34-4f2d-9388-2dcbf00802ef" />
+
+<br/><br/>
+
+<img width="300" alt="project ready" src="https://github.com/user-attachments/assets/35378910-77ec-4069-a13d-e4a68fd6fe97" />
+
+<i>Your project, ready in seconds.</i>
+</div>
 
 ### `praty spring add`
 
-Run inside an existing Spring Boot project. Browses the same dependency catalog and adds selected starters straight into your Maven or Gradle build.
+Forgot to add a dependency? Run this inside an existing Spring Boot project — it browses the same dependency catalog and adds selected starters straight into your Maven or Gradle build.
 
-📸 *[Insert screenshot here]*
-📸 *[Insert screenshot here]*
+<div align="center">
+<img width="600" alt="spring add dependencies" src="https://github.com/user-attachments/assets/ab6fcefd-5723-4db6-8c91-93ff610435b4" />
+</div>
 
 ### `praty spring remove`
 
-The reverse of `add` — opens the dependency browser, lets you pick starters to remove, and cleans up the build file.
+Don't want `lombok` in your project anymore? The reverse of `add` — opens the dependency browser, lets you pick starters to remove, and cleans up the build file.
 
-📸 *[Insert screenshot here]*
-📸 *[Insert screenshot here]*
+<div align="center">
+<img width="600" alt="spring remove dependencies" src="https://github.com/user-attachments/assets/b74691f0-f2f0-432f-85f3-be44ea7fdc44" />
+</div>
 
 ### `praty spring deps`
 
-Shows a summary of Spring dependencies currently in use.
+Shows a summary of Spring dependencies recently used.
+
+<div align="center">
+<img width="450" alt="spring deps summary" src="https://github.com/user-attachments/assets/bbee4f15-540f-490a-9135-fe42fc820ac8" />
+</div>
 
 > 💡 The Spring Boot version is resolved **dynamically** from live metadata (with offline fallback), so `praty` follows current releases instead of being frozen to one template. New projects still default to **Java 21**, and generated values (artifact name, directory, package name) are normalized for consistency.
 
