@@ -17,8 +17,6 @@ mvn clean package
 
 # 2. Stable name (matches scripts\praty.bat)
 Copy-Item target\praty-0.1.0.jar target\praty.jar -Force
-
-# 3. Install directory
 New-Item -ItemType Directory -Force -Path C:\praty | Out-Null
 Copy-Item target\praty.jar C:\praty\praty.jar -Force
 Copy-Item scripts\praty.bat C:\praty\praty.bat -Force
