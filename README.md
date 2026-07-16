@@ -1,139 +1,219 @@
-# praty
+<div align="center">
 
-`praty` is a Java 21 + Maven CLI that grew from a few basic system commands into a Spring Boot helper tool with an interactive terminal workflow.
+# ⚡ praty
 
-## What Changed
+**A Java CLI that grew from simple system shortcuts into a full Spring Boot project assistant.**
 
-The original CLI was a small command router for things like wake, sleep, file actions, and app shortcuts. The newer architecture adds a Spring-focused subsystem called `springx`, which handles project setup and dependency changes through an interactive JLine wizard, Spring Initializr metadata, local config/cache storage, and build-file editing for Maven or Gradle projects.
+![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk&logoColor=white)
+![Maven](https://img.shields.io/badge/Build-Maven-blue?style=flat-square&logo=apachemaven&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Initializr-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey?style=flat-square&logo=windows&logoColor=white)
 
-In simple terms, the app now looks like this:
+</div>
 
-`Main` -> `Parser` -> `CommandRegistry` -> module command -> Springx services, wizard, network, validation, and dependency editors.
+---
 
-## Architecture
+## ✨ What is praty?
 
-The codebase is organized into two broad parts.
+`praty` started as a tiny command router — wake, sleep, open an app, copy a file.
 
-The first part is the command layer under `src/main/java/praty`, where the CLI parses user input and routes it to commands such as `awake`, `sleep`, `file`, `app`, `check`, `get`, `cd`, `spring`, and `man`.
+It's now also a **Spring Boot project assistant**: an interactive terminal wizard that creates new Spring Boot projects, adds or removes dependencies from existing ones, and talks directly to [Spring Initializr](https://start.spring.io) to keep everything up to date.
 
-The second part is the Spring layer under `src/main/java/praty/springx`, which is responsible for:
+```
+Main → Parser → CommandRegistry → module command → Springx (wizard, network, validation, dependency editors)
+```
 
-- interactive project creation
-- browsing available Spring Boot versions and dependencies
-- adding and removing dependencies in existing projects
-- reading and caching Spring Initializr metadata
-- validating project locations and names
-- editing Maven or Gradle build files
-- rendering terminal UI and progress states
-- storing local preferences and recent project data
+---
 
-The Spring workflow is built around a few clear pieces:
+## 🧩 Architecture at a Glance
 
-- `springx.commands.SetupCommand` launches the interactive project wizard.
-- `springx.commands.AddCommand` adds dependencies to an existing Spring Boot project.
-- `springx.commands.RemoveCommand` removes dependencies from an existing Spring Boot project.
-- `springx.services.MetadataService` loads live Spring Initializr metadata and falls back to cached or mock metadata when needed.
-- `springx.network.HttpInitializrClient` talks to Spring Initializr.
-- `springx.dependency.*` finds the right starter dependencies and edits the build file.
-- `springx.wizard.*` drives the interactive setup screens.
+The codebase splits cleanly into two halves:
 
-## Commands
+| Layer | Location | Responsibility |
+|---|---|---|
+| 🖥️ **Command Layer** | `src/main/java/praty` | Parses input and routes to commands like `awake`, `file`, `app`, `cd`, `spring` |
+| 🌱 **Spring Layer** | `src/main/java/praty/springx` | Project creation, dependency management, Initializr metadata, build-file editing, terminal UI |
 
-`awake`, `sleep`, `shutdown`, `restart`, `check update`, `check updates`, `get update`, `get updates`, `file cp`, `file mv`, `file -d`, `file unzip`, `app -add`, `app -o`, `app -open`, `app -ls`, `app -rm`, `app -r`, `cd ~`, `spring setup`, `spring add`, `spring remove`, `spring deps`, `man`
+### Key Pieces of the Spring Layer
 
-## Spring Version And Workflow
+| Class | Role |
+|---|---|
+| `springx.commands.SetupCommand` | Launches the interactive project wizard |
+| `springx.commands.AddCommand` | Adds dependencies to an existing project |
+| `springx.commands.RemoveCommand` | Removes dependencies from an existing project |
+| `springx.services.MetadataService` | Loads live metadata, with cached/mock fallback |
+| `springx.network.HttpInitializrClient` | Talks to Spring Initializr |
+| `springx.dependency.*` | Finds starters and edits the build file |
+| `springx.wizard.*` | Drives the interactive setup screens |
 
-The new Spring side of `praty` is designed for Spring Boot project generation and dependency management. It does not just print a template; it asks questions, fetches metadata, and then creates or updates a real project based on those answers.
+---
 
-When you run `praty spring setup`, the tool:
+## 📖 Commands
 
-1. Loads Spring Initializr metadata.
-2. Opens an interactive JLine wizard in the terminal.
-3. Lets you choose project name, group, artifact, build tool, language, packaging, Java version, Spring Boot version, and dependencies.
-4. Validates the target folder so it does not accidentally create a project in the wrong place.
-5. Calls Spring Initializr to download the starter project.
-6. Extracts and configures the project.
-7. Saves local usage data and recent project settings.
+<table>
+<tr><td valign="top">
 
-`praty spring add` is for an existing Spring Boot project. It loads the same metadata and dependency catalog, then lets you browse available starters and add selected ones into the current Maven or Gradle build.
+**⚙️ System**
+```
+awake
+sleep
+shutdown
+restart
+```
 
-`praty spring remove` does the reverse. It opens the dependency browser, lets you pick starters to remove, and updates the build file cleanly.
+</td><td valign="top">
 
-`praty spring deps` shows the Spring dependency usage summary.
+**🔍 Updates**
+```
+check update(s)
+get update(s)
+```
 
-The Spring Boot version is handled dynamically from metadata, with cached/offline fallback support. That means the CLI can follow available Spring Boot releases instead of being stuck on one hardcoded template. The default project setup in the codebase still starts from Java 21, and the generated project values are normalized so the artifact name, target directory, and package naming stay consistent.
+</td><td valign="top">
 
-### Setup
+**📁 Files & Apps**
+```
+file cp / mv / -d / unzip
+app -add / -o / -open
+app -ls / -rm / -r
+cd ~
+```
 
-Run `praty spring setup` and follow the wizard.
+</td><td valign="top">
 
-[Insert screenshot here]
+**🌱 Spring**
+```
+spring setup
+spring add
+spring remove
+spring deps
+```
 
-[Insert screenshot here]
+</td></tr>
+</table>
 
-### Add
+Need a refresher? Run:
+```powershell
+praty man
+```
 
-Run `praty spring add` inside an existing Spring Boot project.
+---
 
-[Insert screenshot here]
+## 🌱 Spring Workflow
 
-[Insert screenshot here]
+`praty` doesn't just print a template — it asks questions, fetches real metadata, and generates or updates an actual project.
 
-### Remove
+### `praty spring setup`
 
-Run `praty spring remove` inside an existing Spring Boot project.
+```
+ 1. Load Spring Initializr metadata
+ 2. Open the interactive JLine wizard
+ 3. Choose name, group, artifact, build tool, language,
+    packaging, Java version, Spring Boot version, dependencies
+ 4. Validate the target folder
+ 5. Call Spring Initializr and download the starter project
+ 6. Extract and configure the project
+ 7. Save local usage data and recent project settings
+```
 
-[Insert screenshot here]
+📸 *[Insert screenshot here]*
+📸 *[Insert screenshot here]*
 
-[Insert screenshot here]
+### `praty spring add`
 
-## Build
+Run inside an existing Spring Boot project. Browses the same dependency catalog and adds selected starters straight into your Maven or Gradle build.
 
-Run the following from the project root to compile and package the JAR:
+📸 *[Insert screenshot here]*
+📸 *[Insert screenshot here]*
+
+### `praty spring remove`
+
+The reverse of `add` — opens the dependency browser, lets you pick starters to remove, and cleans up the build file.
+
+📸 *[Insert screenshot here]*
+📸 *[Insert screenshot here]*
+
+### `praty spring deps`
+
+Shows a summary of Spring dependencies currently in use.
+
+> 💡 The Spring Boot version is resolved **dynamically** from live metadata (with offline fallback), so `praty` follows current releases instead of being frozen to one template. New projects still default to **Java 21**, and generated values (artifact name, directory, package name) are normalized for consistency.
+
+---
+
+## 🔌 Under the Hood
+
+| Library / API | Purpose |
+|---|---|
+| `org.jline:jline` | Interactive terminal wizard and prompts |
+| `com.fasterxml.jackson.core:jackson-databind` | Parses Spring Initializr metadata JSON |
+| `java.net.http.HttpClient` (Java 21) | Sends requests to Spring Initializr |
+
+**Talks directly to `https://start.spring.io`:**
+
+| Request | Purpose |
+|---|---|
+| `GET /` (`Accept: application/json`) | Loads Initializr metadata for the wizard |
+| `POST /starter.zip` (`application/x-www-form-urlencoded`) | Downloads the generated project |
+
+The form includes build tool, language, Spring Boot version, group, artifact, package name, Java version, and dependency IDs.
+
+---
+
+## 🛠️ Build from Source
 
 ```powershell
 mvn package
 ```
 
-The executable JAR will be created at `target/praty-0.1.0.jar`.
+The runnable JAR lands at:
+```
+target/praty-0.1.0.jar
+```
 
-## Windows Setup
+---
 
-To use `praty` on Windows, create a folder such as `C:\tools\praty` and copy these two files into it:
+## 🪟 Windows Setup
 
+**1. Create a folder** — e.g. `C:\tools\praty` — and copy in:
 - `target/praty-0.1.0.jar`
 - `scripts/praty.bat`
 
-The batch file can be as simple as this:
-
+**2. Keep the batch file simple:**
 ```bat
 @echo off
 SET SCRIPT_DIR=%~dp0
 java -jar "%SCRIPT_DIR%praty-0.1.0.jar" %*
 ```
 
-After that, add the folder to your PATH. One easy PowerShell example is:
-
+**3. Add the folder to your PATH:**
 ```powershell
 setx PATH "%PATH%;C:\tools\praty"
 ```
 
-Open a new terminal window and run the commands from anywhere:
-
+**4. Open a new terminal and run it from anywhere:**
 ```powershell
 praty awake
 praty sleep
 praty spring setup
 ```
 
-## How I Created It
+---
 
-In a very simple way, I built the project like this:
+## 🧱 How It Was Built
 
-1. I created the Java project and built it with Maven, which produced a JAR file.
-2. I made a small batch file so Windows could launch that JAR with one command.
-3. I put both files in a folder on the C drive.
-4. I wrote the batch script to call `java -jar` on the JAR file.
-5. I added that folder to PATH so the command could be used from any terminal.
+1. Built the Java project with Maven → produced a JAR
+2. Wrote a small `.bat` launcher for Windows
+3. Placed both files in a folder on the C drive
+4. Had the batch script call `java -jar` on the JAR
+5. Added that folder to PATH
 
-That is why `praty` feels like a normal command on Windows even though the actual app is a Java program running from a JAR.
+That's the whole trick — `praty` feels like a native Windows command, even though it's really a Java program launched from a JAR.
+
+---
+
+<div align="center">
+
+Made for a smoother terminal workflow — one Spring Boot project at a time. 🌱
+
+</div>
