@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: praty.springx.model.ProjectSpecTest
+Test set: praty.modules.alias.AliasStoreTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in praty.springx.model.ProjectSpecTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.547 s -- in praty.modules.alias.AliasStoreTest

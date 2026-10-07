@@ -13,6 +13,7 @@ praty\modules\app\AddNewApplicationToOpen.class
 praty\modules\app\AddNewApplicationToOpen$1.class
 praty\springx\model\CreateResult.class
 praty\springx\plugin\PluginRegistry.class
+praty\modules\alias\AliasNames.class
 praty\springx\model\DependencyRef.class
 praty\springx\plugin\NoopPluginRegistry.class
 praty\springx\services\SpringInitArgumentFactory.class
@@ -31,6 +32,7 @@ praty\springx\config\ConfigStore.class
 praty\springx\theme\Theme.class
 praty\modules\spring\ShowDependencies.class
 praty\command\Command.class
+praty\modules\alias\AliasShellInstaller.class
 praty\springx\terminal\KeyEvent.class
 praty\springx\dependency\DependencyBrowser.class
 praty\modules\file\CopyCommand.class
@@ -69,6 +71,7 @@ praty\springx\config\JsonConfigStore$ConfigDto.class
 praty\springx\dependency\BuildFileEditor.class
 praty\springx\dependency\GradleBuildFileEditor.class
 praty\command\CommandContext.class
+praty\modules\alias\AliasCommand.class
 praty\modules\spring\DependencyUsageStore$1.class
 praty\springx\commands\AddCommand.class
 praty\springx\network\InitializrMetadata.class
@@ -92,6 +95,7 @@ praty\springx\wizard\InteractiveNewProjectWizard.class
 praty\springx\generator\ZipProjectGenerator.class
 praty\springx\terminal\JLineTerminalUi$Action.class
 praty\springx\wizard\NewProjectWizard.class
+praty\modules\alias\AliasStore$1.class
 praty\springx\dependency\MockDependencyData.class
 praty\springx\dependency\CompositeBuildFileEditor.class
 praty\springx\dependency\MavenBuildFileEditor.class
@@ -106,6 +110,7 @@ praty\springx\validation\DefaultProjectValidator.class
 praty\modules\spring\DependencyUsageStore.class
 praty\springx\commands\RemoveCommand.class
 praty\springx\validation\ProjectLocationGuard.class
+praty\modules\alias\AliasStore.class
 praty\modules\app\RemoveApplicationCommand.class
 praty\modules\app\RemoveApplicationCommand$1.class
 praty\springx\generator\ZipProjectGenerator$1.class

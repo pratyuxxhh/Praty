@@ -4,6 +4,7 @@ import praty.command.Command;
 import praty.command.CommandContext;
 import praty.command.CommandRegistry;
 import praty.command.Parser;
+import praty.modules.alias.AliasCommand;
 import praty.modules.app.AddNewApplicationToOpen;
 import praty.modules.app.ListApplicationsCommand;
 import praty.modules.app.OpenApplicationCommand;
@@ -89,6 +90,7 @@ public class Main {
         registry.register("spring", "remove", new RemoveCommand());
         registry.register("spring", "deps", new ShowDependencies());
         registry.register("man", "", new ShowManualCommand());
+        registry.register("alias", "", new AliasCommand());
     }
 }
 

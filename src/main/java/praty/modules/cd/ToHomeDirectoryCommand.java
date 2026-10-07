@@ -9,7 +9,7 @@ import praty.command.CommandContext;
 
 public class ToHomeDirectoryCommand implements Command {
 
-    private static final String HOME = EnvConfig.get("PRATY_HOME_DIR", "C:\\Users\\ishuk\\OneDrive\\Desktop");
+    private static final String HOME = EnvConfig.get("PRATY_HOME_DIR", "C:\\programs");
 
     @Override
     public void execute(CommandContext ctx) {

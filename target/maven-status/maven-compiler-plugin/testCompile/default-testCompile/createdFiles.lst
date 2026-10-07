@@ -17,5 +17,6 @@ praty\springx\model\ProjectSpecTest.class
 praty\springx\services\DefaultProjectCreateServiceTest$1.class
 praty\springx\core\ResultAndErrorReporterTest.class
 praty\springx\wizard\InteractiveNewProjectWizardTest.class
+praty\modules\alias\AliasStoreTest.class
 praty\springx\validation\ProjectLocationGuardTest.class
 praty\modules\setup\NewProjectCommandTest.class

@@ -58,6 +58,7 @@ public class ShowManualCommand implements Command {
         descriptions.put("spring:setup", "Setup a new Spring Boot project.");
         descriptions.put("spring:deps", "Show Spring dependency usage counts.");
         descriptions.put("man", "Show this manual.");
+        descriptions.put("alias", "Create a shell alias, or list them with -l.");
         return descriptions;
     }
 }
